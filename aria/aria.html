@@ -1439,7 +1439,6 @@
         For example, one common convention for moving focus to the pop-up is that <kbd>Down Arrow</kbd> moves focus from the text input to the first focusable descendant of the pop-up element or, if the pop-up element supports aria-activedescendant, to the pop-up element itself.
         Authors SHOULD NOT include the pop-up element in the tab sequence of the page. </p>
 <p>If the text input provides autocompletion behavior as described in <pref>aria-autocomplete</pref>, authors should set <code>aria-autocomplete</code> to <code>true</code>. </p>
-        <p>Authors MUST set <pref>aria-multiline</pref> to <code>false</code> on the element that has role <code>combobox</code>.</p>
         <pre class="example highlight">
             &lt;input type="text" aria-label="Tag" role="combobox" aria-expanded="true"
   <strong>aria-autocomplete="true" aria-controls="controlled_listbox"</strong>&gt;
@@ -1448,6 +1447,8 @@
   &lt;li role="option" <strong>id="selected_option"</strong>&gt;Zoom&lt;/li&gt;
 &lt;/ul&gt;
 </pre>
+<p>The features and behaviors of combobox implementations vary widely. Consequently, there are many important authoring considerations.
+See the <cite><a href="http://www.w3.org/TR/wai-aria-practices/"><abbr title="Accessible Rich Internet Applications">WAI-ARIA</abbr> Authoring Practices Guide</a></cite> [[WAI-ARIA-PRACTICES]] for additional details on implementing combobox design patterns.</p>
 				<p class="note">Elements with the role <code>combobox</code> have an implicit <sref>aria-expanded</sref> value of <code>false</code>.</p>
 				<p class="note">Elements with the role <code>combobox</code> have an implicit <pref>aria-haspopup</pref> value of <code>true</code>.</p>
 				<p class="note">Elements with the role <code>combobox</code> have an implicit <pref>aria-orientation</pref> value of <code>vertical</code>.</p>
