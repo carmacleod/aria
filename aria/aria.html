@@ -1438,10 +1438,10 @@
         <p>To be <a>keyboard accessible</a>, authors SHOULD provide keyboard mechanisms for moving focus to and from the <code>combobox</code> element and the pop-up element it controls. 
         For example, one common convention for moving focus to the pop-up is that <kbd>Down Arrow</kbd> moves focus from the text input to the first focusable descendant of the pop-up element or, if the pop-up element supports aria-activedescendant, to the pop-up element itself.
         Authors SHOULD NOT include the pop-up element in the tab sequence of the page. </p>
-<p>If the text input provides autocompletion behavior as described in <pref>aria-autocomplete</pref>, authors should set <code>aria-autocomplete</code> to <code>true</code>. </p>
+<p>If the text input provides autocompletion behavior as described in <pref>aria-autocomplete</pref>, authors should set <code>aria-autocomplete</code> to <code>both</code>. Otherwise, authors SHOULD set <code>aria-autocomplete</code> to <code>none</code>.</p>
         <pre class="example highlight">
             &lt;input type="text" aria-label="Tag" role="combobox" aria-expanded="true"
-  <strong>aria-autocomplete="true" aria-controls="controlled_listbox"</strong>&gt;
+  <strong>aria-autocomplete="both" aria-controls="controlled_listbox"</strong>&gt;
 &lt;ul role="listbox" <strong>id="controlled_listbox" aria-activedescendant="selected_option"</strong>&gt;
   &lt;li role="option"&gt;Zebra&lt;/li&gt;
   &lt;li role="option" <strong>id="selected_option"</strong>&gt;Zoom&lt;/li&gt;
@@ -1451,8 +1451,6 @@
 See the <cite><a href="http://www.w3.org/TR/wai-aria-practices/"><abbr title="Accessible Rich Internet Applications">WAI-ARIA</abbr> Authoring Practices Guide</a></cite> [[WAI-ARIA-PRACTICES]] for additional details on implementing combobox design patterns.</p>
 				<p class="note">Elements with the role <code>combobox</code> have an implicit <sref>aria-expanded</sref> value of <code>false</code>.</p>
 				<p class="note">Elements with the role <code>combobox</code> have an implicit <pref>aria-haspopup</pref> value of <code>true</code>.</p>
-				<p class="note">Elements with the role <code>combobox</code> have an implicit <pref>aria-orientation</pref> value of <code>vertical</code>.</p>
-        <p class="note">In <cite><a href="http://www.w3.org/TR/2007/REC-xforms-20071029/">XForms</a></cite> [[XFORMS10]] the same <code>select</code> can have one of 3 appearances: combo-box, drop-down box, or group of radio-buttons. Many browsers allow users to type ahead to existing choices in a drop-down select widget. This specification does not constrain the presentation of the combo box.</p>
 			</div>
 			<table class="role-features">
 				<caption>Characteristics:</caption>
@@ -1539,7 +1537,6 @@ See the <cite><a href="http://www.w3.org/TR/wai-aria-practices/"><abbr title="Ac
 						<td class="implicit-values">
 							Default for <sref>aria-expanded</sref> is <code class="default">false</code>.<br/>
 							Default for <pref>aria-haspopup</pref> is <code class="default">true</code>.<br/>
-							Default for <pref>aria-orientation</pref> is <code class="default">vertical</code>.<br/>
 						</td>
 					</tr>
 				</tbody>
