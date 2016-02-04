@@ -1432,24 +1432,22 @@
 			<div class="role-description">
   				<p>A single-line text <rref>input</rref> that can trigger a pop-up, such as a  <rref>listbox</rref> or <rref>grid</rref>, for helping the user set the value of the <code>input</code>. </p>
           <p>Authors MUST associate the element with role <code>combobox</code> with a pop-up element that has role <rref>listbox</rref>, <rref>grid</rref>, <rref>tree</rref>, or <rref>dialog</rref>. 
-          Authors SHOULD make the association between the <code>combobox</code> and the pop-up element using <pref>aria-controls</pref>. 
-          However, legacy implementations MAY make the association using <pref>aria-owns</pref> as specified in ARIA 1.0. 
-          </p>
+          Authors SHOULD make the association between the <code>combobox</code> and the pop-up element by setting <pref>aria-controls</pref> on the element with role <code>combobox</code>. 
+          However, in legacy implementations, authors  MAY make the association using <pref>aria-owns</pref> as specified in ARIA 1.0. </p>
+          <p>Authors MUST set <sref>aria-expanded</sref> on the element that has role <code>combobox</code> and ensure that <code>aria-expanded</code> is set to <code>false</code> when the pop-up element is hidden and set to <code>true</code> when the pop-up element is visible. </p>
         <p>To be <a>keyboard accessible</a>, authors SHOULD provide keyboard mechanisms for moving focus to and from the <code>combobox</code> element and the pop-up element it controls. 
         For example, one common convention for moving focus to the pop-up is that <kbd>Down Arrow</kbd> moves focus from the text input to the first focusable descendant of the pop-up element or, if the pop-up element supports aria-activedescendant, to the pop-up element itself.
-        Authors SHOULD NOT include the pop-up element in the tab sequence of the page.
-</p>        
-						<pre class="example highlight">
-						&lt;input type="text" aria-label="Tag" role="combobox" aria-expanded="true"
+        Authors SHOULD NOT include the pop-up element in the tab sequence of the page. </p>
+<p>If the text input provides autocompletion behavior as described in <pref>aria-autocomplete</pref>, authors should set <code>aria-autocomplete</code> to <code>true</code>. </p>
+        <p>Authors MUST set <pref>aria-multiline</pref> to <code>false</code> on the element that has role <code>combobox</code>.</p>
+        <pre class="example highlight">
+            &lt;input type="text" aria-label="Tag" role="combobox" aria-expanded="true"
   <strong>aria-autocomplete="true" aria-controls="controlled_listbox"</strong>&gt;
 &lt;ul role="listbox" <strong>id="controlled_listbox" aria-activedescendant="selected_option"</strong>&gt;
   &lt;li role="option"&gt;Zebra&lt;/li&gt;
   &lt;li role="option" <strong>id="selected_option"</strong>&gt;Zoom&lt;/li&gt;
 &lt;/ul&gt;
 </pre>
-<p>If the text input provides autocompletion behavior as described in <pref>aria-autocomplete</pref>, authors should set <code>aria-autocomplete</code> to <code>true</code>. </p>
-        <p>Authors MUST set <pref>aria-multiline</pref> to <code>false</code> on the element that has role <code>combobox</code>.</p>
-        <p>Authors MUST set <sref>aria-expanded</sref> on the element that has role <code>combobox</code> and ensure that <code>aria-expanded</code> is set to <code>false</code> when the pop-up element is hidden and set to <code>true</code> when the pop-up element is visible. </p>
 				<p class="note">Elements with the role <code>combobox</code> have an implicit <sref>aria-expanded</sref> value of <code>false</code>.</p>
 				<p class="note">Elements with the role <code>combobox</code> have an implicit <pref>aria-haspopup</pref> value of <code>true</code>.</p>
 				<p class="note">Elements with the role <code>combobox</code> have an implicit <pref>aria-orientation</pref> value of <code>vertical</code>.</p>
