@@ -8242,25 +8242,33 @@ See the <cite><a href="http://www.w3.org/TR/wai-aria-practices/"><abbr title="Ac
 					</tr>
 				</tbody>
 			</table>
-			<table class="value-descriptions">
-				<caption>Values:</caption>
-				<thead>
-					<tr>
-						<th scope="col">Value</th>
-						<th scope="col">Description</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<th class="value-name" scope="row">true</th>
-						<td class="value-description">The web application provides text after the caret as a suggestion for how to complete the input.</td>
-					</tr>
-					<tr>
-						<th class="value-name" scope="row"><strong class="default">false(default)</strong></th>
-						<td class="value-description">Input completion suggestions are not provided.</td>
-					</tr>
-				</tbody>
-			</table>
+			     <table class="value-descriptions">
+        <caption>Values:</caption>
+        <thead>
+          <tr>
+            <th scope="col">Value</th>
+            <th scope="col">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th class="value-name" scope="row">both</th>
+            <td class="value-description"> As a user types in the text input, text suggesting a way to complete the input value appears after the caret. The suggested value is also indicated in a pop-up element, such as a listbox, that is associated with the input. The value displayed in the input may also change if the user moves focus among values within the pop-up.</td>
+          </tr>
+          <tr>
+            <th class="value-name" scope="row">inline</th>
+            <td class="value-description"> As a user types in the text input, text suggesting a way to complete the input value appears after the caret. </td>
+          </tr>
+          <tr>
+            <th class="value-name" scope="row">list</th>
+            <td class="value-description"> As a user types in the text input, text suggesting a way to complete the input value does not appear after the caret in the input, but possible values for the input may be shown in a pop-up element, such as a listbox, that is associated with the input. </td>
+          </tr>
+          <tr>
+            <th class="value-name" scope="row"><strong class="default">none (default)</strong></th>
+            <td class="value-description">As a user types in the text input, text suggesting a way to complete the input value does not appear after the caret in the input. </td>
+          </tr>
+        </tbody>
+      </table>
 		</div>
 		<hr/>
 		<div class="state" id="aria-busy">
