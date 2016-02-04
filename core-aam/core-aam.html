@@ -412,7 +412,7 @@ var mappingTableLabels = {
             <li>Use the first such substring in textual order that matches the name of a non-abstract <abbr title="Accessible Rich Internet Applicatiaon">WAI-ARIA</abbr> role for the <abbr title="application programming interface">API</abbr> role mapping. See the <a href="#mapping_role_table">Role Mapping Table</a> below for details.</li>
           </ol>
         </li>
-        <li>User agents MUST NOT map roles defined in the <abbr title="Accessible Rich Internet Application">WAI-ARIA</abbr> specification as &quot;abstract&quot; via the standard role mechanism of the accessibility <abbr title="application programming interface">API</abbr>. The abstract roles are:
+        <li>User agents MUST NOT map roles defined in the <abbr title="Accessible Rich Internet Application">WAI-ARIA</abbr> specification as &quot;abstract&quot; via the standard role mechanism of the accessibility <abbr title="application programming interface">API</abbr>.  Use the fallback procedure specified in the next rule if only an abstract role is provided. The abstract roles are:
           <ul>
             <li><a class="role-reference" href="#command"><code>command</code></a></li>
             <li><a class="role-reference" href="#composite"><code>composite</code></a></li>
@@ -428,7 +428,7 @@ var mappingTableLabels = {
             <li><a class="role-reference" href="#window"><code>window</code></a></li>
           </ul>
         </li>
-        <li>If the element does not have a role attribute, or if the role attribute contains no tokens matching the name of a non-abstract <abbr title="Accessible Rich Internet Application">WAI-ARIA</abbr> role, the user agent MUST fall back on normal processing of  the base markup for the element with the role attribute. For example,  for <samp>&lt;table role=&quot;foo&quot;&gt;</samp> use the element name <code>table</code> to determine what  platform accessibility <abbr title="application programming interface">API</abbr> role to use according to the host language's role mapping. For <samp>&lt;input type=&quot;text&quot;  role=&quot;bar&quot;&gt;</samp>, use the platform accessibility <abbr title="application programming interface">API</abbr> for a text input.</li>
+        <li>If the element does not have a role attribute, or if the role attribute contains no tokens matching the name of a non-abstract <abbr title="Accessible Rich Internet Application">WAI-ARIA</abbr> role, the user agent MUST fall back on normal processing of the base markup for the element. For example, for <samp>&lt;table role=&quot;foo&quot;&gt;</samp> use the  <abbr title="Hypertext Markup Language">HTML</abbr> <code>table</code> element to determine the platform accessibility <abbr title="application programming interface">API</abbr> role mapping. For <samp>&lt;input type=&quot;text&quot;  role=&quot;bar&quot;&gt;</samp>, use the mapping for an  <abbr title="Hypertext Markup Language">HTML</abbr> <code>text input</code>.</li>
         <li>When an explicit or inherited role of <code>none</code> or <code>presentation</code> is applied to an element, the user agent MUST implement  the rules for the <a class="role-reference" href="#none"><code>none</code></a> or the <a class="role-reference" href="#presentation"><code>presentation</code></a> <a class="termref">role</a> defined in <cite><a class="specref" href="">Accessible Rich Internet Applications (WAI-ARIA) 1.0</a></cite> [[!WAI-ARIA]]. </li>
         <li id="exposeRoleString">User agents MUST expose the <abbr title="Accessible Rich Internet Application">WAI-ARIA</abbr> role string if the <abbr title="application programming interface">API</abbr> supports a mechanism to do so. This allows assistive technologies to do their own  additional processing of roles. 
           <ul>
@@ -489,7 +489,7 @@ var mappingTableLabels = {
 					<td><code>ROLE_SYSTEM_APPLICATION</code></td>
                     <td>
                         <ul>
-                            <li>Control type/role is <code>Pane</code>. (TBD)</li>
+                            <li>Control type/role is <code>Pane</code>.</li>
                             <li>Localized Control Type is <code>application</code>.</li>
                         </ul>
                     </td>
@@ -504,8 +504,8 @@ var mappingTableLabels = {
 					    <p>IAccessible2: Object attribute <code>xml-roles:article</code> </p></td>
                     <td>
                         <ul>
-                            <li>Control type/role is <code>Document</code>.</li>
-                            <li>Localized Control Type is <code>article</code>. (TBD)</li>
+                            <li>Control type/role is <code>Group</code>.</li>
+                            <li>Localized Control Type is <code>article</code>.</li>
                         </ul>
                     </td>
                     <td><code>ROLE_ARTICLE</code> + do not expose <code>STATE_EDITABLE</code>
@@ -689,10 +689,14 @@ var mappingTableLabels = {
 				</tr>
 				<tr id="role-map-gridcell">
 					<th><a class="role-reference" href="#gridcell"><code>gridcell</code></a></th>
-					<td><code>ROLE_SYSTEM_CELL</code></td>
+					<td><code>ROLE_SYSTEM_CELL</code>
+	                    <p>IAccessible2: Use <code>IAccessibleTableCell</code> interface.</p>
+	                </td>
           <td><code>DataItem</code>
             <p>Also requires <code>selectionitem</code> pattern; <code>selectionContainer</code> property must reference the parent <code>grid</code> object</p></td>
-					<td><code>ROLE_TABLE_CELL</code></td>
+					<td><code>ROLE_TABLE_CELL</code>
+					    <p>Use <code>TableCell</code> interface.</p>
+					</td>
 					<td>AXRole: <code>AXCell</code><br />
               AXSubrole: <code>&lt;nil&gt;</code><br />
               AXRoleDescription: <code>'cell'</code></td>
@@ -788,6 +792,8 @@ var mappingTableLabels = {
                         <ul>
                             <li>Control type/role is <code>Group</code>.</li>
                             <li>Localized Control Type is <code>main</code>.</li>
+                            <li>Landmark Type is <code>Main</code>.</li>
+                            <li>Localized Landmark Type is <code>main</code>.</li>
                         </ul>
                     </td>
           <td><code>ROLE_LANDMARK</code> and object attribute <code>xml-roles:main</code></td>
@@ -1393,6 +1399,16 @@ var mappingTableLabels = {
                   <td><a href="#not_mapped">Not mapped</a></td>
                   <td><a href="#not_mapped">Not mapped</a></td>
                 </tr>
+                <tr id="ariaColIndex">
+                  <th><a class="property-reference" href="#aria-colindex"><code>aria-colindex</code></a> [ARIA 1.1]</th>
+                  <td>TBD.</td>
+                  <td>
+                    <p><code>GridItem.Column</code></p>
+                    <p>Subtract 1 from the one-based <code>aria-colindex</code> since the UIA value is zero-based.</p>
+                  </td>
+                  <td>TBD.</td>
+                  <td>TBD.</td>
+                </tr>
                 <tr id="ariaControls">
                   <th><a class="property-reference" href="#aria-controls"><code>aria-controls</code></a></th>
                   <td><p>IAccessible2: </p>
@@ -1400,16 +1416,15 @@ var mappingTableLabels = {
                       <li>Expose pointer to the accessible object in <code>IA2_RELATION_CONTROLLER_FOR</code>                      </li>
                       <li>Expose reverse relations as described in <a href="#mapping_additional_relations">Relations</a>.</li>
                   </ul></td>
-                  <td>Expose pointer to the accessible object <code>ControllerFor</code> property</td>
+                  <td>Expose pointer to the accessible object using <code>ControllerFor</code> property</td>
                   <td>Expose pointer to the accessible object <code>RELATION_CONTROLLER_FOR</code>
                     <p>Expose reverse relations as described in <a href="#mapping_additional_relations">Relations</a>.</p></td>
                   <td><code>array AXLinkedUIElements</code> contains pointers to nodes matching IDREFs</td>
                 </tr>
                 <tr id="ariaCurrent">
                   <th><a class="state-reference" href="#aria-current"><code>aria-current</code></a> (state) [ARIA 1.1] </th>
-                  <td><p>(TBD) IAccessible2: </p>
+                  <td><p>IAccessible2: </p>
                     <ul>
-                      <li>Set <code>IA2_STATE_ACTIVE</code>. </li>
                       <li>Expose the value of <code>aria-current</code> in object attribute <code>active:&lt;value&gt;</code>.</li>
                     </ul>
                   </td>
@@ -1420,18 +1435,14 @@ var mappingTableLabels = {
                       <li>Expose the value of <code>aria-current</code> in object attribute <code>active:&lt;value&gt;</code>.</li>
                     </ul>
                   </td>
-                  <td>TBD.</td>
+                  <td><code>AXAriaCurrent: &lt;value&gt;</code>.</td>
                 </tr>
                 <tr id="ariaCurrentUndefined">
                   <th><a class="state-reference" href="#aria-current"><code>aria-current</code></a> is undefined (state) [ARIA 1.1]</th>
-                  <td><p>(TBD) IAccessible2: </p>
-                      <p>Clear <code>IA2_STATE_ACTIVE</code>. </p>
-                  </td>
-                  <td>TBD.  <a href="#not_mapped">Not mapped</a></td>
-                  <td>
-                    <p>Clear <code>STATE_ACTIVE</code>. </p>
-                  </td>
-                  <td>TBD.  <a href="#not_mapped">Not mapped</a></td>
+                  <td><a href="#not_mapped">Not mapped*</a>.</td>
+                  <td><a href="#not_mapped">Not mapped*</a>.</td>
+                  <td><a href="#not_mapped">Not mapped*</a>.</td>
+                  <td><a href="#not_mapped">Not mapped*</a>.</td>
                 </tr>
                 <tr id="ariaDescribedAt">
               		<th><a class="property-reference" href="#aria-describedat"><code>aria-describedat</code></a></th>
@@ -1481,6 +1492,13 @@ var mappingTableLabels = {
                   <td><p>Expose as object attribute <code>dropeffect:none</code> if there are no other valid tokens.</p>
                   <p><a href="#not_mapped">Not mapped</a> if not specified by the author.</p></td>
                   <td><a href="#not_mapped">Not mapped*</a></td>
+                </tr>
+                <tr id="ariaErrorMessage">
+                  <th>[ARIA 1.1]  <a class="property-reference" href="#aria-errormessage"><code>aria-errormessage</code></a></th>
+                  <td>TBD</td>
+                  <td>Expose pointer to the accessible object using <code>ControllerFor</code> property.</td>
+                  <td>TBD</td>
+                  <td>TBD</td>
                 </tr>
                 <tr id="ariaExpandedTrue">
                   <th><a class="state-reference" href="#aria-expanded"><code>aria-expanded</code></a><code>=&quot;true&quot;</code> (state)</th>
@@ -1888,6 +1906,16 @@ var mappingTableLabels = {
                   <td>Expose the description string in object attribute <code>roledescription:&lt;value&gt;</code>.</td>
                   <td>AXRoleDescription: <code>'&lt;value&gt;'</code>.</td>
                 </tr>
+                <tr id="ariaRowIndex">
+                  <th><a class="property-reference" href="#aria-rowindex"><code>aria-rowindex</code></a> [ARIA 1.1]</th>
+                  <td>TBD.</td>
+                  <td>
+                    <p><code>GridItem.Row</code></p>
+                    <p>Subtract 1 from the one-based <code>aria-rowindex</code> since the UIA value is zero-based.</p>
+                  </td>
+                  <td>TBD.</td>
+                  <td>TBD.</td>
+                </tr>
                 <tr id="ariaSelectedTrue">
                   <th><a class="state-reference" href="#aria-selected"><code>aria-selected</code></a><code>=&quot;true&quot;</code> (state)</th>
                   <td>Expose <code>STATE_SYSTEM_SELECTED</code>
@@ -2145,17 +2173,17 @@ var mappingTableLabels = {
             </tr>
           <tr id="event-aria-current">
               <th>[ARIA 1.1] <a class="state-reference" href="#aria-current"><code>aria-current</code></a> (state)</th>
-              <td>(TBD) <code>EVENT_OBJECT_STATECHANGE</code></td>
-              <td>(TBD) </td>
+              <td><code>IA2_EVENT_OBJECT_ATTRIBUTE_CHANGED</code></td>
+              <td><code>PropertyChangedEvent</code></td>
               <td><code>object:state-changed:active</code></td>
-              <td>TBD </td>
+              <td>No notification</td>
             </tr>
               <tr id="event-aria-disabled">
               <th><a class="state-reference" href="#aria-disabled"><code>aria-disabled</code></a> (state)</th>
               <td><code>EVENT_OBJECT_STATECHANGE</code></td>
-              <td><a href="#not_mapped">Not mapped</a></td>
+              <td>No event</td>
               <td><code>object:state-changed:enabled</code> and  <code>object:state-changed:sensitive</code></td>
-              <td>Not mapped</td>
+              <td>No notification</td>
             </tr>
             <tr id="event-aria-describedby">
               <th> <a class="property-reference" href="#aria-describedby"><code>aria-describedby</code></a></th>
@@ -2167,9 +2195,9 @@ var mappingTableLabels = {
             <tr id="event-aria-dropeffect">
                 <th><a class="property-reference" href="#aria-dropeffect"><code>aria-dropeffect</code></a> (property)</th>
                 <td>IAccessible2: <code>IA2_EVENT_OBJECT_ATTRIBUTE_CHANGED</code></td>
-                <td>Not mapped</td>
+                <td>No event</td>
                 <td><code>object:property-change</code></td>
-                <td>Not mapped</td>
+                <td>No notification</td>
             </tr>
             <tr id="event-aria-expanded">
               <th><a class="state-reference" href="#aria-expanded"><code>aria-expanded</code></a> (state)</th>
@@ -2184,9 +2212,9 @@ var mappingTableLabels = {
               <th><a class="state-reference" href="#aria-grabbed"><code>aria-grabbed</code></a> (state)</th>
               <td><p><code>EVENT_OBJECT_SELECTION</code></p>
                   <p>IAccessible2: <code>IA2_EVENT_OBJECT_ATTRIBUTE_CHANGED</code></p></td>
-              <td>Not mapped</td>
+              <td>No event</td>
               <td><code>object:property-change</code></td>
-              <td>Not mapped</td>
+              <td>No notification</td>
             </tr>
             <tr id="event-aria-hidden">
               <th><a class="state-reference" href="#aria-hidden"><code>aria-hidden</code></a> (state)</th>
@@ -2199,7 +2227,7 @@ var mappingTableLabels = {
             <tr id="event-aria-invalid">
               <th><a class="state-reference" href="#aria-invalid"><code>aria-invalid</code></a> (state)</th>
               <td><code>EVENT_OBJECT_STATECHANGE</code></td>
-              <td>Not mapped</td>
+              <td>No event</td>
               <td><code>object:state-changed:invalid_entry</code></td>
               <td><code>AXInvalidStatusChanged</code></td>
             </tr>
@@ -2213,23 +2241,23 @@ var mappingTableLabels = {
             <tr id="event-aria-pressed">
               <th><a class="state-reference" href="#aria-pressed"><code>aria-pressed</code></a> (state)</th>
               <td><code>EVENT_OBJECT_STATECHANGE</code></td>
-              <td>Not mapped</td>
+              <td>No event</td>
               <td><code>object:state-changed:pressed</code></td>
-              <td>Not mapped</td>
+              <td>No notification</td>
             </tr>
             <tr id="event-aria-readonly">
               <th><a class="property-reference" href="#aria-readonly"><code>aria-readonly</code></a></th>
               <td><code>EVENT_OBJECT_STATECHANGE</code></td>
-              <td>Not mapped</td>
+              <td>No event</td>
               <td><code>object:state-changed:readonly</code></td>
-              <td>Not mapped</td>
+              <td>No notification</td>
             </tr>
             <tr id="event-aria-required">
               <th><a class="property-reference" href="#aria-required"><code>aria-required</code></a></th>
               <td><code>EVENT_OBJECT_STATECHANGE</code></td>
-              <td>Not mapped</td>
+              <td>No event</td>
               <td><code>object:state-changed:required</code></td>
-              <td>Not mapped</td>
+              <td>No notification</td>
             </tr>
             <tr id="event-aria-selected">
               <th><a class="property-reference" href="#aria-selected"><code>aria-selected</code></a> (state)</th>
@@ -2248,7 +2276,7 @@ var mappingTableLabels = {
             <tr id="event-aria-valuetext">
               <th><a class="property-reference" href="#aria-valuetext"><code>aria-valuetext</code></a></th>
               <td><code>EVENT_OBJECT_VALUECHANGE</code></td>
-              <td>Not mapped</td>
+              <td>No event</td>
               <td><code>object:property-change:accessible-value</code></td>
               <td><code>AXValueChanged</code></td>
             </tr>
@@ -2653,7 +2681,18 @@ var mappingTableLabels = {
 	<section class="appendix" id="changelog">
 		<h2>Change Log</h2>
 		<section>
-			<h2>Substantive changes since the <a href="http://www.w3.org/TR/2015/WD-core-aam-1.1-20150714/">last public working draft</a></h2>
+			<h2>Substantive changes since the <a href="http://www.w3.org/TR/2015/WD-core-aam-1.1-20151119/">last public working draft</a></h2>
+			<ul>
+				<li>02-Feb-2016: Modified UIA mapping of main role to include a Landmark Type and a Localized Landmark Type.  Added UIA mapping for aria-errormessage.</li>
+				<li>25-Jan-2016: Added AXAPI mappings for aria-current.</li>
+				<li>15-Jan-2016: Added UIA mappings for aria-current.</li>
+				<li>11-Jan-2016: Modified UIA mapping for roles article and application.  Finalized IA2 mapping of aria-current.</li>
+				<li>03-Jan-2016: Added UIA mappings for aria-colindex and aria-rowindex.  Added placeholders for the other AAAPIs.</li>
+			    <!-- EdNote: After each WD publish, move contents of this list into the next one below.  -->
+			</ul>
+		</section>
+		<section>
+			<h2>Other substantive changes since the <a href="http://www.w3.org/TR/2014/REC-wai-aria-implementation-20140320/">WAI-ARIA 1.0 User Agent Implementation Guide Recommendation</a></h2>
 			<ul>
 				<li>03-Oct-2015: Modified UIA role mappings of application, banner, complementary, contentinfo, main, search, navigation, article, definition, log, math, and note.</li>
 				<li>28-Sep-2015: Added IA2 mapping of role="text".</li>
@@ -2661,12 +2700,6 @@ var mappingTableLabels = {
 				<li>24-Aug-2015: Modified mappings of region role in light of its new status as a landmark.</li>
 				<li>18-Aug-2015: Added mappings of aria-roledescription for MSAA+IA2, UIA, ATK/AT-SPI and AXAPI.</li>
 				<li>31-Jul-2015: Finalized all mappings of aria-placeholder.</li>
-				<!-- EdNote: After each WD publish, move contents of this list into the next one below.  -->
-			</ul>
-		</section>
-		<section>
-			<h2>Other substantive changes since the <a href="http://www.w3.org/TR/2014/REC-wai-aria-implementation-20140320/">WAI-ARIA 1.0 User Agent Implementation Guide Recommendation</a></h2>
-			<ul>
 				<li>02-Jul-2015: Modified default values for missing required attributes table for aria-level with heading role, aria-checked with switch, and aria-valuemin, aria-valuemax, and aria-valuenow with scrollbar, slider, and spinbutton.</li>
 				<li>02-Jul-2015: Added special case of switch role to mappings of aria-checked="mixed" and undefined aria-checked.</li>
 				<li>25-Jun-2015: ATK/AT-SPI mapping for aria-current.</li>
@@ -2689,14 +2722,13 @@ var mappingTableLabels = {
 				<li>27-Oct-2014: Moved text alternative computation section to its own document.</li>
 				<li>29-Aug-2014: Modified mappings of grid role to differentiate a grid from a table.</li>
 				<li>05-Jun-2014: Modified ATK/AT-SPI mappings for article, checkbox, menuitemcheckbox, menuitemradio, and aria-checked. </li>
-				<li>30-May-2014: Modified ATK/AT-SPI mappings for focus event, banner, listbox, log, marquee, math, navigation, note, radiogroup, row, timer, and treeitem.
-</li>
+				<li>30-May-2014: Modified ATK/AT-SPI mappings for focus event, banner, listbox, log, marquee, math, navigation, note, radiogroup, row, timer, and treeitem.</li>
 				<li>21-May-2014: Added additional AXAPI mapping for aria-busy.</li>
 				<li>15-May-2014: Provided  IA2 and ATK/AT-SPI mappings of aria-pressed and tablist.</li>
 				<li>15-May-2014: Change AXAPI mapping for aria-busy.</li>
-						<li>25-March-2014: Added text to Group Position section about computing implicit level information for a tree.</li>
-						<li>24-March-2014: Updated mapping of aria-hidden=true to indicate that user agents should not expose unless the accessible is focused or fires an accessibility event.</li>
-						<li>21-March-2014: Added back UIA columns to all mapping tables that were removed after the 1.0 Candidate Recommendation.</li>
+				<li>25-March-2014: Added text to Group Position section about computing implicit level information for a tree.</li>
+				<li>24-March-2014: Updated mapping of aria-hidden=true to indicate that user agents should not expose unless the accessible is focused or fires an accessibility event.</li>
+				<li>21-March-2014: Added back UIA columns to all mapping tables that were removed after the 1.0 Candidate Recommendation.</li>
 				<!-- EdNote: After each WD publish, move previous list into this one. -->
 			</ul>
 		</section>
