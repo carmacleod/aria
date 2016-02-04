@@ -8216,7 +8216,8 @@ See the <cite><a href="http://www.w3.org/TR/wai-aria-practices/"><abbr title="Ac
 			<pdef>aria-autocomplete</pdef>
 			<div class="property-description">
 				<p>Indicates whether user input completion suggestions are provided.</p>
-				<p>For a <rref>textbox</rref> with the <pref>aria-autocomplete</pref> <a>attribute</a> set to either <code>inline</code> or <code>both</code>, authors SHOULD ensure that any auto-completed text is selected, so the user can type over it.</p>
+				<p>When input suggestions are provided, authors SHOULD ensure that the suggested text that follows the caret is in a selected state so that additional user input can replace the suggestion.</p>
+        <p class="note"> The token values of <code>None</code>, <code>inline</code>, <code>list</code>, and <code>both</code> specified by ARIA 1.0 are depricated. Browsers and assistive technologies will continue to recognize them at least until ARIA 2.0. However, authors are encouraged to start using the new boolean values. </p>
 			</div>
 			<table class="property-features">
 				<caption>Characteristics:</caption>
@@ -8241,7 +8242,7 @@ See the <cite><a href="http://www.w3.org/TR/wai-aria-practices/"><abbr title="Ac
 					</tr>
 					<tr>
 						<th class="property-value-head" scope="row">Value:</th>
-						<td class="property-value"><a href="#valuetype_token">token</a></td>
+            <td class="property-value"><a href="#valuetype_true-false">true/false</a></td>
 					</tr>
 				</tbody>
 			</table>
@@ -8255,20 +8256,12 @@ See the <cite><a href="http://www.w3.org/TR/wai-aria-practices/"><abbr title="Ac
 				</thead>
 				<tbody>
 					<tr>
-						<th class="value-name" scope="row">both</th>
-						<td class="value-description">A list of choices appears and the currently selected suggestion also appears inline.</td>
+						<th class="value-name" scope="row">true</th>
+						<td class="value-description">The web application provides text after the caret as a suggestion for how to complete the input.</td>
 					</tr>
 					<tr>
-						<th class="value-name" scope="row">inline</th>
-						<td class="value-description">The system provides text after the caret as a suggestion for how to complete the field.</td>
-					</tr>
-					<tr>
-						<th class="value-name" scope="row">list</th>
-						<td class="value-description">A list of choices appears from which the user can choose.</td>
-					</tr>
-					<tr>
-						<th class="value-name" scope="row"><strong class="default">none (default)</strong></th>
-						<td class="value-description">No input completion suggestions are provided.</td>
+						<th class="value-name" scope="row"><strong class="default">false(default)</strong></th>
+						<td class="value-description">Input completion suggestions are not provided.</td>
 					</tr>
 				</tbody>
 			</table>
