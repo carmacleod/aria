@@ -1438,7 +1438,7 @@
         <p>To be <a>keyboard accessible</a>, authors SHOULD provide keyboard mechanisms for moving focus to and from the <code>combobox</code> element and the pop-up element it controls. 
         For example, one common convention for moving focus to the pop-up is that <kbd>Down Arrow</kbd> moves focus from the text input to the first focusable descendant of the pop-up element or, if the pop-up element supports aria-activedescendant, to the pop-up element itself.
         Authors SHOULD NOT include the pop-up element in the tab sequence of the page. </p>
-<p>If the text input provides autocompletion behavior as described in <pref>aria-autocomplete</pref>, authors should set <code>aria-autocomplete</code> to <code>both</code>. Otherwise, authors SHOULD set <code>aria-autocomplete</code> to <code>none</code>.</p>
+<p>If the text input provides autocompletion behavior as described in <pref>aria-autocomplete</pref>, authors SHOULD set <code>aria-autocomplete</code> to <code>both</code>. Otherwise, authors SHOULD set <code>aria-autocomplete</code> to <code>list</code>.</p>
         <pre class="example highlight">
             &lt;input type="text" aria-label="Tag" role="combobox" aria-expanded="true"
   <strong>aria-autocomplete="both" aria-controls="controlled_listbox"</strong>&gt;
