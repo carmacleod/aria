@@ -796,7 +796,8 @@
 				<p> Because only the focusable elements contained in an <code>application</code> element are accessible to users of some assistive technologies, authors MUST use one of the following techniques to ensure all non-decorative static text or image content inside an application is accessible:</p>
 				<ol>
 					<li>Associate the content with a focusable element using <pref>aria-labelledby</pref> or <pref>aria-describedby</pref>.</li>
-					<li>Place the content in a focusable element that has role <rref>document</rref> or <code>article</code>.</li>
+					<li>Place the content in a focusable element that has role <rref>document</rref> or <rref>article</rref>.</li>
+					<li>Manage focus of descendants as described in <a href="#managingfocus">Managing Focus</a>, updating the value of <pref>aria-activedescendant</pref> to reference the <a>element</a> containing the focused content.</li>
 				</ol>
 				</div>
 			<table class="role-features">
@@ -842,7 +843,7 @@
 					</tr>
 					<tr>
 						<th class="role-properties-head" scope="row">Supported States and Properties:</th>
-						<td class="role-properties"> </td>
+						<td class="role-properties"><pref>aria-activedescendant</pref></td>
 					</tr>
 					<tr>
 						<th class="role-inherited-head" scope="row">Inherited States and Properties:</th>
@@ -8033,9 +8034,9 @@
 		<div class="property" id="aria-activedescendant">
 			<pdef>aria-activedescendant</pdef>
 			<div class="property-description">
-				<p>Identifies the currently active descendant of a <rref>composite</rref> <a>widget</a>.</p>
-				<p>This is used when a composite widget is responsible for managing its current active child to reduce the overhead of having all children be focusable. Examples include: multi-level lists, trees, and grids. In some implementations the <a>user agent</a> may use <pref>aria-activedescendant</pref> to tell <a>assistive technologies</a> that the active descendant has focus. Authors MAY use the <pref>aria-activedescendant</pref> attribute on the focused descendant of a composite widget; for example, on a textbox descendant of a combo box.</p>
-				<p>Authors SHOULD ensure that the <a>element</a> targeted by the <pref>aria-activedescendant</pref> attribute is either a descendant of the container in the DOM, or is a logical descendant as indicated by the <pref>aria-owns</pref> attribute. The user agent is not expected to validate that the active descendant is a descendant of the container. Authors SHOULD ensure that the currently active descendant is visible and in view (or scrolls into view) when focused.</p>
+				<p>Identifies the currently-active descendant of a <rref>composite</rref> <a>widget</a>, <rref>group</rref>, or <rref>application</rref>.</p>
+				<p><code>aria-activedescendant</code> is used when an <a>element</a> is responsible for managing its currently active child to reduce the overhead of having all children be focusable. Examples include: multi-level lists, trees, and grids. In some implementations the <a>user agent</a> might use <code>aria-activedescendant</code> to tell <a>assistive technologies</a> that the active descendant has focus. Authors MAY use <code>aria-activedescendant</code> to reference the focused descendant of a <rref>composite</rref> <a>widget</a> or <rref>application</rref>, such as the selected option of a <rref>combobox</rref> or the current slide in a presentation editing <rref>application</rref>.</p>
+				<p>Authors SHOULD ensure that the <a>element</a> referenced by <code>aria-activedescendant</code> is either a descendant of the container in the DOM, or is a logical descendant as indicated by the <pref>aria-owns</pref> attribute. The <a>user agent</a> is not expected to validate that the active descendant is a descendant of the container. Authors SHOULD ensure that the currently active descendant is visible and in view (or scrolls into view) when focused.</p>
 			</div>
 			<table class="property-features">
 				<caption>Characteristics:</caption>
@@ -10923,6 +10924,7 @@ PUBLIC "-//W3C//ENTITIES XHTML ARIA Attributes 1.0//EN" "aria-attributes-1.mod"
 			<li>28-Jan-2016: Removed <rref>input</rref> as a superclass of <rref>scrollbar</rref> and <rref>select</rref>.</li>
 			<li>04-Feb-2016: Marked <sref>aria-grabbed</sref> and <pref>aria-dropeffect</pref> as planned for deprecation.</li>
 			<li>04-Feb-2016: Removed the implicit value for <pref>aria-orientation</pref> on <rref>combobox</rref>.</li>
+			<li>FIXME DATE: Added <pref>aria-activedescendant</pref> as a supported property of <rref>application</rref>.</li>
 		</ul>
 	</section>
 	<section>
