@@ -1423,6 +1423,15 @@
 				<p>Typically, the default state of a <code>combobox</code> is collapsed. In the collapsed state, only the <code>textbox</code> element of a <code>combobox</code> is visible. A <code>combobox</code> is said to be expanded when both the <code>textbox</code> and the popup element are visible. Authors MUST set <sref>aria-expanded</sref> to <code>true</code> on an element with role <code>combobox</code> when it is expanded and <code>false</code> when it is collapsed. Elements with the role <code>combobox</code> have an implicit <sref>aria-expanded</sref> value of <code>false</code>. </p>
         <p> When a <code>combobox</code> is expanded, authors MUST ensure it contains or owns an additional interactive element representing the popup. Examples of elements that can serve as a popup include <rref>listbox</rref>, <rref>tree</rref>, <rref>grid</rref>, and <rref>dialog</rref>. Elements with the role <code>combobox</code> have an implicit <pref>aria-haspopup</pref> value of <code>true</code>. </p>
 			<p>To be <a>keyboard accessible</a>, authors SHOULD manage focus of descendants for all instances of this <a>role</a>, as described in <a href="#managingfocus">Managing Focus</a>. When a combobox receives focus, authors SHOULD ensure focus is placed on the <code>textbox</code> element. Authors SHOULD provide keyboard mechanisms for moving focus to and from the <code>textbox</code> element and the pop-up. For example, one common convention is that <kbd>Down Arrow</kbd> moves focus from the text input to the first focusable descendant of the pop-up element. If the popup element supports aria-activedescendant, authors MAY specify a value for <code>aria-activedescendant</code> on the <code>textbox</code> element that refers to a descendant of the popup element.</p>
+      <pre class="example highlight">
+        &lt;div aria-label="Tag" role="combobox" aria-expanded="true" aria-owns="owned_listbox"&gt;
+            &lt;input type="text" aria-autocomplete="list" aria-activedescendant="selected_option"&gt;
+        &lt;/div&gt;
+        &lt;ul role="listbox" id="owned_listbox"&gt;
+            &lt;li role="option"&gt;Zebra&lt;/li&gt;
+            &lt;li role="option" id="selected_option"&gt;Zoom&lt;/li&gt;
+        &lt;/ul&gt;
+</pre>
                 <p>The features and behaviors of combobox implementations vary widely. Consequently, there are many important authoring considerations. See the <cite><a href="http://www.w3.org/TR/wai-aria-practices/"><abbr title="Accessible Rich Internet Applications">WAI-ARIA</abbr> Authoring Practices Guide</a></cite> [[WAI-ARIA-PRACTICES]] for additional details on implementing combobox design patterns.</p>
 			</div>
 			<table class="role-features">
