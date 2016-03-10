@@ -1425,14 +1425,17 @@
         Authors MUST set <sref>aria-expanded</sref> to <code>true</code> on an element with role <code>combobox</code> when it is expanded and <code>false</code> when it is collapsed.</p>
         <p> When a <code>combobox</code> is expanded, authors MUST ensure it contains or owns an additional interactive element representing the popup.
         Examples of elements that can serve as a popup include <rref>listbox</rref>, <rref>tree</rref>, <rref>grid</rref>, and <rref>dialog</rref>. </p>
-				<p>To be <a>keyboard accessible</a>, authors SHOULD manage focus of descendants for all instances of this <a>role</a>, as described in <a href="#managingfocus">Managing Focus</a>.</p>
+			<p>To be <a>keyboard accessible</a>, authors SHOULD manage focus of descendants for all instances of this <a>role</a>, as described in <a href="#managingfocus">Managing Focus</a>.
+      authors SHOULD provide keyboard mechanisms for moving focus to and from the <code>textbox</code> element and the pop-up.
+  For example, one common convention is that <kbd>Down Arrow</kbd> moves focus from the text input to the first focusable descendant of the pop-up element. </p>
 				<p>Elements with the role <code>combobox</code> have an implicit <sref>aria-expanded</sref> value of <code>false</code> and an implicit <pref>aria-haspopup</pref> value of <code>true</code>.</p>
         <pre class="example highlight">
-            &lt;input type="text" aria-label="Tag" role="combobox" aria-expanded="true"
-  <strong>aria-autocomplete="list" aria-owns="owned_listbox" aria-activedescendant="selected_option"</strong>&gt;
-&lt;ul role="listbox" <strong>id="owned_listbox"</strong>&gt;
+        &lt;div aria-label="Tag" role="combobox" aria-expanded="true" aria-owns="owned_listbox"&gt;
+            &lt;input type="text" aria-autocomplete="list" aria-activedescendant="selected_option"&gt;
+            &lt;/div&gt;
+&lt;ul role="listbox" id="owned_listbox"&gt;
   &lt;li role="option"&gt;Zebra&lt;/li&gt;
-  &lt;li role="option" <strong>id="selected_option"</strong>&gt;Zoom&lt;/li&gt;
+  &lt;li role="option" id="selected_option"&gt;Zoom&lt;/li&gt;
 &lt;/ul&gt;
 </pre>
 			</div>
