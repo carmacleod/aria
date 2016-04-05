@@ -1284,7 +1284,6 @@
 						<th class="role-properties-head" scope="row">Supported States and Properties:</th>
 						<td class="role-properties">
 							<ul>
-								<li><pref>aria-keyshortcuts</pref></li>
 								<li><pref>aria-readonly</pref></li>
 							</ul>
 						</td>
@@ -1584,9 +1583,6 @@
 					<tr>
 						<th class="role-properties-head" scope="row">Supported States and Properties:</th>
 						<td class="role-properties">
-							<ul>
-								<li><pref>aria-keyshortcuts</pref></li>
-							</ul>
 						</td>
 					</tr>
 					<tr>
@@ -2590,7 +2586,6 @@
 						<th class="role-properties-head" scope="row">Supported States and Properties:</th>
 						<td class="role-properties">
 							<ul>
-								<li><pref>aria-keyshortcuts</pref></li>
 								<li><pref>aria-readonly</pref></li>
 								<li><pref>aria-required</pref></li>
 								<li><sref>aria-selected</sref></li>
@@ -4499,7 +4494,6 @@
 						<td class="role-properties">
 							<ul>
 								<li><pref>aria-checked</pref></li>
-								<li><pref>aria-keyshortcuts</pref></li>
 								<li><pref>aria-posinset</pref></li>
 								<li><pref>aria-setsize</pref></li>
 							</ul>
@@ -7163,7 +7157,6 @@
 							<ul>
 								<li><pref>aria-activedescendant</pref></li>
 								<li><pref>aria-autocomplete</pref></li>
-								<li><pref>aria-keyshortcuts</pref></li>
 								<li><pref>aria-multiline</pref></li>
 								<li><pref>aria-placeholder</pref></li>
 								<li><pref>aria-readonly</pref></li>
@@ -9258,8 +9251,10 @@
 				<p>The valid names for non-modifier keys are any printable character such as "A", "B", "1", "2", "$", "Plus" for a plus sign, "Space" for the spacebar, or the names of any other non-modifier key specified in the <a href="http://www.w3.org/TR/DOM-Level-3-Events-key/">DOM Level 3 KeyboardEvent key Values</a> spec [[!DOM-Level-3-Events-key]] - for example, "Enter", "Tab", "ArrowRight", "PageDown", "Escape", or "F1". The use of "Space" for the spacebar is an exception to the <a href="http://www.w3.org/TR/DOM-Level-3-Events-key/">DOM Level 3 KeyboardEvent key Values</a> spec [[!DOM-Level-3-Events-key]] as the space or spacebar key is encoded as <code>'&nbsp;'</code> and would be treated as a whitespace character.</p>
 				<p>Authors MUST ensure modifier keys come first when they are part of a keyboard shortcut. Authors MUST ensure that required non-modifier keys come last when they are part of a shortcut. The order of the modifier keys is not otherwise significant, so "Alt+Shift+T" and "Shift+Alt+T" are equivalent, but "T+Shift+Alt" is not valid because all of the modifier keys don't come first, and "Alt" is not valid because it doesn't include at least one non-modifier key.</p>
 				<p>When specifying an alphabetic key, both the uppercase and lowercase variants are considered equivalent: "a" and "A" are the same.</p>
-				<p>Authors SHOULD avoid using keyboard shortcuts that are used by the requesting user agent. Authors SHOULD avoid keyboard shortcuts that are used by supported assistive technologies running on the intended operating system platforms. Assistive technologies frequently steal keys at the operating system level before they ever reach a user agent. Additionally, using keyboard shortcuts that have already been used by the browser will change the browser behavior resulting in loss of user agent functionality.</p>
-				<p>For many keyboards authors SHOULD avoid keys other than ASCII letters as number characters and common punctuation often require modifiers. Here, the keyboad shortcut entered does not equate to the key generated. For example, in French keyboard layouts, the number characters are not available until you hold the Control key, so a keyboard shortcut defined as "Control+2" would be ambiguous as this is how you would type the number 2 character on a French keyboard. 
+				<p>Authors SHOULD avoid using keyboard shortcuts that are used by the user agent.  Implementing keyboard shortcuts that conflict with user agent, will result in a loss of user agent functionality. Authors SHOULD avoid keyboard shortcuts that are used by supported assistive technologies running on the intended operating system platforms. Assistive technologies frequently steal keys at the operating system level before they ever reach a user agents. </p>
+                                <p>When implementing keyboard shortcuts authors should consider the keyboards they intend to support to avoid unintended results. Keyboard designs vary significantly based on the device used and the languages supported. For example, many modifier keys are used in conjunction with other keys to: create common punctuations; create number characters; swapping keyboard sides on bilingual keyboards to switch languages; and a wide list of other characters and functions.     
+				</p>
+				<p>For many supported keyboards authors can prevent conflicts by avoiding keys other than ASCII letters as number characters and common punctuation often require modifiers. Here, the keyboad shortcut entered does not equate to the key generated. For example, in French keyboard layouts, the number characters are not available until you hold the Control key, so a keyboard shortcut defined as "Control+2" would be ambiguous as this is how you would type the number 2 character on a French keyboard. 
                                 </p>
 				<p>If the character used is determined by a modifier key the author MUST specify the actual key used to generate the character, that is generated by the key, and not the resulting character. This convention enables the assistive technology to accurately convey what keys must be used to generate the shortcut. For example, on most U.S. English keyboards, the percent sign "%" can be input by pressing Shift+5. The correct way to specify this shortcut is "Shift+5". It is incorrect to specify "%" or "Shift+%". However, note that on some international keyboards the percent sign may be an unmodified key, in which case "%" and "Shift+%" could be correct on those keyboards.</p>
 				<p>If the key that needs to be specified is illegal in the host language or would cause a string to be terminated, authors MUST use the string escaping sequence of the host language to specify it. For example, the double-quote character can be encoded as "Shift+&amp;#39;" in HTML.</p>
@@ -9268,7 +9263,7 @@
 					<li>"A"</li>
 					<li>"Shift+Space"</li>
 					<li>"Control+Alt+."</li>
-					<li>"Control+&amp;quot;"</li>
+					<li>"Control+Shift+&amp;#39;"</li>
 				</ul>
 				<p>Examples of valid values for the <pref>aria-keyshortcuts</pref> attribute, that can include more than one space-delimited shortcut, include:</p>
 				<ul>
@@ -9297,7 +9292,7 @@
 					</tr>
 					<tr>
 						<th class="property-applicability-head" scope="row">Used in Roles:</th>
-						<td class="property-applicability">Placeholder</td>
+						<td class="property-applicability">All elements of the base markup</td>
 					</tr>
 					<tr>
 						<th class="property-descendants-head" scope="row">Inherits into Roles:</th>
